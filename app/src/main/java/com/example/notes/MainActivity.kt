@@ -11,13 +11,17 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var notesAdapter: NotesAdapter
 
+    private fun setupRecyclerViewAndAdapter() {
+        notesRecyclerView.layoutManager = LinearLayoutManager(this)
+        notesAdapter = NotesAdapter()
+        notesRecyclerView.adapter = notesAdapter
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        notesRecyclerView.layoutManager = LinearLayoutManager(this)
-        notesAdapter = NotesAdapter()
-        notesRecyclerView.adapter = notesAdapter
+        setupRecyclerViewAndAdapter()
 
         createNewNoteFloatingActionButton.setOnClickListener {
             val startNoteDetailsActivityIntent = Intent(this, NoteDetailsActivity::class.java)
