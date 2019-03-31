@@ -6,4 +6,5 @@
     <string name="title">Title</string>
     <string name="timestamp">TIMESTAMP</string>
     <string name="cancel">Cancel</string>
+    <string name="delete_note">Delete note</string>
 </resources>

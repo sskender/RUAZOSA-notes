@@ -30,7 +30,16 @@ class NotesAdapter : RecyclerView.Adapter<NoteViewHolder>() {
         p0.noteTitleTextView?.text = NotesList.notesList[p1].noteTitle
         p0.noteTimestampTextView?.text = timestampFormat.format(NotesList.notesList[p1].noteTimestamp).toString()
 
-        // TODO onclick listener to edit clicked note
+        // delete note option
+        p0.noteDeleteButton?.setOnClickListener {
+            deleteNoteClick(p1)
+        }
+
+    }
+
+    private fun deleteNoteClick(p1: Int) {
+        NotesList.notesList.removeAt(p1)
+        this.notifyDataSetChanged()
     }
 
 }
