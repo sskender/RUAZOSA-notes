@@ -25,6 +25,13 @@ class NoteDetailsActivity : AppCompatActivity() {
 
             finish()
         }
+
+
+        // cancel button action
+        cancelNoteButton.setOnClickListener {
+            finish()
+        }
+
     }
 
 }
