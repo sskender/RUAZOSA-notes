@@ -13,9 +13,11 @@ import com.example.notes.R
 class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     var noteTitleTextView: TextView? = null
+    var noteTimestampTextView: TextView? = null
 
     init {
         noteTitleTextView = itemView.findViewById(R.id.noteTitleTextView)
+        noteTimestampTextView = itemView.findViewById(R.id.noteTimestampTextView)
     }
 
 }

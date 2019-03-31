@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import com.example.notes.R
 import com.example.notes.model.NotesList
 import com.example.notes.viewholders.NoteViewHolder
+import java.text.SimpleDateFormat
 
 class NotesAdapter : RecyclerView.Adapter<NoteViewHolder>() {
 
@@ -21,7 +22,13 @@ class NotesAdapter : RecyclerView.Adapter<NoteViewHolder>() {
     }
 
     override fun onBindViewHolder(p0: NoteViewHolder, p1: Int) {
+
+        // format note timestamp
+        val timestampFormat = SimpleDateFormat("dd/MM/yy HH:mm")
+
+        // display note properties
         p0.noteTitleTextView?.text = NotesList.notesList[p1].noteTitle
+        p0.noteTimestampTextView?.text = timestampFormat.format(NotesList.notesList[p1].noteTimestamp).toString()
 
         // TODO onclick listener to edit clicked note
     }

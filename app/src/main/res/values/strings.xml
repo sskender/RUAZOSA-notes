@@ -4,4 +4,5 @@
     <string name="noteDetailsHint">Details</string>
     <string name="noteTitleHint">Title</string>
     <string name="title">Title</string>
+    <string name="timestamp">TIMESTAMP</string>
 </resources>

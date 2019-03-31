@@ -10,4 +10,10 @@
             android:layout_height="wrap_content"
             android:id="@+id/noteTitleTextView"
             android:textSize="30sp"/>
+    <TextView
+            android:text="@string/timestamp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/noteTimestampTextView"
+            android:textStyle="italic"/>
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity
 import com.example.notes.model.Note
 import com.example.notes.model.NotesList
 import kotlinx.android.synthetic.main.activity_note_details.*
+import java.util.*
 
 class NoteDetailsActivity : AppCompatActivity() {
 
@@ -18,6 +19,7 @@ class NoteDetailsActivity : AppCompatActivity() {
 
             note.noteTitle = noteTitleEditText.text.toString()
             note.noteDetails = noteDetailsEditText.text.toString()
+            note.noteTimestamp = Date()
 
             NotesList.notesList.add(note)
 
