@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".NoteDetailsActivity">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/noteTitleEditText" android:hint="@string/noteTitleHint"
+                android:importantForAutofill="no"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/noteDetailsEditText" android:hint="@string/noteDetailsHint" android:autofillHints=""/>
+        <Button
+                android:text="@string/saveButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/saveNoteButton"
+                style="@style/Widget.AppCompat.Button.Colored"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
