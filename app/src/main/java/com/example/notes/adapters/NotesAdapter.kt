@@ -35,6 +35,8 @@ class NotesAdapter : RecyclerView.Adapter<NoteViewHolder>() {
             deleteNoteClick(p1)
         }
 
+        p0.bindNote(NotesList.notesList[p1])
+
     }
 
     private fun deleteNoteClick(p1: Int) {
