@@ -50,7 +50,7 @@ class NoteDetailsActivity : AppCompatActivity() {
         // cancel button action
         cancelNoteButton.setOnClickListener {
             // send result code zero, nothing new is done
-            setResult(0)
+            setResult(0, null)
             finish()
         }
 
