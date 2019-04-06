@@ -15,6 +15,9 @@ class MainActivity : AppCompatActivity() {
     // notes adapter
     private lateinit var notesAdapter: NotesAdapter
 
+    /**
+     * Setup RecyclerView and Adapter on app start
+     */
     private fun setupRecyclerViewAndAdapter() {
         notesRecyclerView.layoutManager = LinearLayoutManager(this)
         notesAdapter = NotesAdapter()
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         setupRecyclerViewAndAdapter()
 
+        // new note button
         createNewNoteFloatingActionButton.setOnClickListener {
             val startNoteDetailsActivityIntent = Intent(this, NoteDetailsActivity::class.java)
             startActivityForResult(startNoteDetailsActivityIntent, 0)
@@ -38,8 +42,15 @@ class MainActivity : AppCompatActivity() {
         notesAdapter.notifyDataSetChanged()
     }
 
+    /**
+     * Call this method on one of following actions:
+     *  - new note was created
+     *  - existing note was updated
+     *
+     *  Read action from result code
+     */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // nothing has been made (read from result code)
+        // nothing has been made
         if (resultCode == 0) {
             return
         }

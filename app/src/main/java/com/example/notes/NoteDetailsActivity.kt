@@ -9,7 +9,7 @@ import java.util.*
 
 class NoteDetailsActivity : AppCompatActivity() {
 
-    // change this depending on if a new note is created or the old one edited
+    // change this flag depending on if a new note is created or the old one edited
     private var thisIsANewNote = true
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,6 +17,7 @@ class NoteDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_note_details)
 
         // fill from intent extra (if note is being edited)
+        // else text fields will just remain empty
         if (intent.extras != null) {
             noteTitleEditText.setText(intent.extras?.get("title").toString())
             noteDetailsEditText.setText(intent.extras?.get("details").toString())
