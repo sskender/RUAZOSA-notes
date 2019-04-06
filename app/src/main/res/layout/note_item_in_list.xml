@@ -7,16 +7,23 @@
 
     <LinearLayout
             android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
         <TextView
                 android:text="@string/title"
+                android:textColor="#FFD81B60"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/noteTitleTextView"
-                android:textSize="18sp"/>
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_weight="0"/>
         <TextView
                 android:text="@string/timestamp"
+                android:textColor="#FFD81B60"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/noteTimestampTextView"
@@ -26,7 +33,10 @@
             android:layout_height="wrap_content"
             app:srcCompat="@android:drawable/ic_delete"
             android:id="@+id/deleteNoteImageButton"
-            android:contentDescription="@string/delete_note"
+            android:contentDescription="@string/deleteNote"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
             android:visibility="visible"
-            android:layout_width="wrap_content"/>
+            android:layout_width="wrap_content"
+            android:layout_weight="0"/>
 </LinearLayout>

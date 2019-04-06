@@ -1,37 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".NoteDetailsActivity">
 
-    <LinearLayout
-            android:orientation="vertical"
+    <TextView
+            android:text="@string/noteTitleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailsLayoutDetailsTextView"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:textColor="#FFD81B60"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="24dp"/>
+    <EditText
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/noteTitleEditText" android:hint="@string/noteTitleHint"
-                android:importantForAutofill="no"/>
-        <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPersonName"
-                android:ems="10"
-                android:id="@+id/noteDetailsEditText" android:hint="@string/noteDetailsHint" android:autofillHints=""/>
-        <Button
-                android:text="@string/saveButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/saveNoteButton"
-                style="@style/Widget.AppCompat.Button.Colored"/>
-        <Button
-                android:text="@string/cancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/cancelNoteButton"
-                style="@style/Widget.AppCompat.Button.Colored"/>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:ems="10"
+            android:id="@+id/noteTitleEditText"
+            android:hint="@string/noteTitleHint"
+            android:importantForAutofill="no"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintTop_toBottomOf="@+id/detailsLayoutDetailsTextView"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textStyle="italic"
+            android:textColor="#FFD81B60"/>
+    <TextView
+            android:text="@string/noteDetailsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/detailsLayoutTitleTextView"
+            android:textSize="14sp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"
+            android:textColor="#FFD81B60"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/noteTitleEditText"/>
+    <EditText
+            android:layout_width="match_parent"
+            android:inputType="textMultiLine"
+            android:ems="10"
+            android:id="@+id/noteDetailsEditText"
+            android:hint="@string/noteDetailsHint"
+            android:lines="5"
+            android:minLines="5"
+            android:autofillHints=""
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:textColor="#FFD81B60"
+            android:singleLine="false"
+            android:scrollIndicators="right"
+            android:scrollbars="vertical"
+            android:scrollHorizontally="false"
+            android:textStyle="italic"
+            android:gravity="top" android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@+id/detailsLayoutTitleTextView"/>
+    <Button
+            android:text="@string/saveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/saveNoteButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="16dp"/>
+    <Button
+            android:text="@string/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/cancelNoteButton"
+            style="@style/Widget.AppCompat.Button.Colored"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="16dp"/>
 </android.support.constraint.ConstraintLayout>
