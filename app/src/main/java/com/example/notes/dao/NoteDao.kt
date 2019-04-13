@@ -19,6 +19,9 @@ interface NoteDao {
     @Query("SELECT * FROM notesData")
     fun getAll(): List<Note>
 
+    @Query("DELETE FROM notesData WHERE uuid = :uuid")
+    fun deleteByUuid(uuid: Int)
+
     @Delete
     fun delete(note: Note)
 
