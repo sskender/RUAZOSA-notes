@@ -1,19 +1,33 @@
 package com.example.notes
 
+import android.arch.persistence.room.Room
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.notes.adapters.NotesAdapter
+import com.example.notes.dao.AppDatabase
 import com.example.notes.model.Note
 import com.example.notes.model.NotesList
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    // Room db
+    private lateinit var db: AppDatabase
+
     // notes adapter
     private lateinit var notesAdapter: NotesAdapter
+
+    /**
+     * Setup Room database
+     */
+    private fun setupRoomDB() {
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "notes-db"
+        ).build()
+    }
 
     /**
      * Setup RecyclerView and Adapter on app start
@@ -28,7 +42,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        setupRoomDB()
         setupRecyclerViewAndAdapter()
+
+        // load all notes on startup
+        Thread(Runnable {
+            NotesList.notesList = db.noteDao().getAll() as MutableList<Note>
+            notesAdapter.notifyDataSetChanged()
+        }).start()
+
 
         // new note button
         createNewNoteFloatingActionButton.setOnClickListener {
@@ -58,14 +80,17 @@ class MainActivity : AppCompatActivity() {
         // something has changed
         // get new note properties and save them to database
         if (data != null && data.extras != null) {
-            val note = Note()
 
-            note.uuid = data.extras?.get("uuid") as UUID?
-            note.noteTitle = data.extras?.get("title").toString()
-            note.noteDetails = data.extras?.get("details").toString()
-            note.noteTimestamp = data.extras?.get("timestamp") as Date?
+            val note = Note(
+                data.extras?.get("title").toString(),
+                data.extras?.get("details").toString(),
+                data.extras?.get("timestamp").toString()
+            )
 
-            updateDatabase(note)
+            Thread(Runnable {
+                db.noteDao().insert(note)
+                NotesList.notesList = db.noteDao().getAll() as MutableList<Note>
+            }).start()
         }
 
         notesAdapter.notifyDataSetChanged()
