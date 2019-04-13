@@ -12,7 +12,6 @@ import com.example.notes.NoteDetailsActivity
 import com.example.notes.R
 import com.example.notes.model.Note
 import com.example.notes.model.NotesList
-import java.text.SimpleDateFormat
 
 class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
@@ -39,7 +38,8 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
         // display note properties
         p0.noteTitleTextView?.text = NotesList.notesList[p1].noteTitle
-        p0.noteTimestampTextView?.text = p0.timestampFormat.format(NotesList.notesList[p1].noteTimestamp).toString()
+        p0.noteTimestampTextView?.text =
+            NotesList.notesList[p1].noteTimestamp //p0.timestampFormat.format(NotesList.notesList[p1].noteTimestamp).toString()
 
         // delete note option
         p0.noteDeleteButton?.setOnClickListener {
@@ -63,7 +63,7 @@ class NotesAdapter : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
     inner class NoteViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         // note timestamp format
-        val timestampFormat = SimpleDateFormat("dd/MM/yy HH:mm")
+        //val timestampFormat = SimpleDateFormat("dd/MM/yy HH:mm")
 
         // note_item_in_list properties
         var noteTitleTextView: TextView? = null
