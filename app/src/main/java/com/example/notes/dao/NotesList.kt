@@ -1,4 +1,6 @@
-package com.example.notes.model
+package com.example.notes.dao
+
+import com.example.notes.model.Note
 
 object NotesList {
 
