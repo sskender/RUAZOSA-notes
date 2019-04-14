@@ -7,8 +7,8 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.example.notes.adapters.NotesAdapter
 import com.example.notes.dao.AppDatabase
+import com.example.notes.dao.NotesList
 import com.example.notes.model.Note
-import com.example.notes.model.NotesList
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,38 +19,27 @@ class MainActivity : AppCompatActivity() {
     // notes adapter
     private lateinit var notesAdapter: NotesAdapter
 
-    /**
-     * Setup Room database
-     */
-    private fun setupRoomDB() {
-        db = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java, "notes-db"
-        ).build()
-    }
-
-    /**
-     * Setup RecyclerView and Adapter on app start
-     */
-    private fun setupRecyclerViewAndAdapter() {
-        notesRecyclerView.layoutManager = LinearLayoutManager(this)
-        notesAdapter = NotesAdapter()
-        notesRecyclerView.adapter = notesAdapter
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setupRoomDB()
-        setupRecyclerViewAndAdapter()
+        // room db
+        db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "notes-db"
+        ).build()
 
-        // load all notes on startup
+        // recycle view and adapter
+        notesRecyclerView.layoutManager = LinearLayoutManager(this)
+        notesAdapter = NotesAdapter(db)
+        notesRecyclerView.adapter = notesAdapter
+
+        // grab notes from db
         Thread(Runnable {
             NotesList.notesList = db.noteDao().getAll() as MutableList<Note>
             notesAdapter.notifyDataSetChanged()
         }).start()
-
 
         // new note button
         createNewNoteFloatingActionButton.setOnClickListener {
@@ -59,10 +48,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     override fun onResume() {
         super.onResume()
         notesAdapter.notifyDataSetChanged()
     }
+
 
     /**
      * Call this method on one of following actions:
@@ -72,40 +63,35 @@ class MainActivity : AppCompatActivity() {
      *  Read action from result code
      */
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        // nothing has been made
-        if (resultCode == 0) {
-            return
+
+        if (resultCode >= 1) {
+            val newNote = Note(
+                data?.extras?.get("newTitle").toString(),
+                data?.extras?.get("newDetails").toString(),
+                data?.extras?.get("newTimestamp").toString()
+            )
+
+            NotesList.notesList.add(newNote)
+            Thread(Runnable {
+                db.noteDao().insert(newNote)
+            }).start()
         }
 
-        // something has changed
-        // get new note properties and save them to database
-        if (data != null && data.extras != null) {
-
-            val note = Note(
-                data.extras?.get("title").toString(),
-                data.extras?.get("details").toString(),
-                data.extras?.get("timestamp").toString()
+        if (resultCode == 2) {
+            val oldNote = Note(
+                data?.extras?.get("oldTitle").toString(),
+                data?.extras?.get("oldDetails").toString(),
+                data?.extras?.get("oldTimestamp").toString()
             )
 
             Thread(Runnable {
-                db.noteDao().insert(note)
+                db.noteDao().deleteByProperties(oldNote.noteTitle, oldNote.noteDetails, oldNote.noteTimestamp)
                 NotesList.notesList = db.noteDao().getAll() as MutableList<Note>
             }).start()
         }
 
         notesAdapter.notifyDataSetChanged()
-    }
 
-    private fun updateDatabase(note: Note) {
-        // remove old note from database (find by uuid)
-        for ((index, value) in NotesList.notesList.withIndex()) {
-            if (value.uuid == note.uuid) {
-                NotesList.notesList.removeAt(index)
-                break
-            }
-        }
-        // save new note
-        NotesList.notesList.add(note)
     }
 
 }
